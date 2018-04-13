@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -16,11 +17,12 @@ import com.jxaummd.light.MainActivity;
 import com.jxaummd.light.MyApplication;
 import com.jxaummd.light.R;
 import com.jxaummd.light.base.adapter.MySelfAdapter;
+import com.jxaummd.light.base.adapter.SetListStringAdapter;
 import com.jxaummd.light.base.iface.IOnclickListener;
 
 public class ChoseVoicePeople extends AppCompatActivity {
     private RecyclerView SettingList;
-    private MySelfAdapter mySelfAdapter;
+    private SetListStringAdapter mySelfAdapter;
     private Toolbar  toolbar ;
 
 
@@ -38,18 +40,21 @@ public class ChoseVoicePeople extends AppCompatActivity {
         actionBar.setTitle("发音人选择");
 
 
-
-
-
         SettingList=findViewById(R.id.myself_myselflist);
-        mySelfAdapter = new MySelfAdapter();
-        mySelfAdapter.addItem(0, "周俊婷",v->startActivity(new Intent(MainActivity.activity,ChoseVoicePeople.class)),false);
-        mySelfAdapter.addItem(0,"俞章政",null,false);
-        mySelfAdapter.addItem(0,"杨博伦",null,false);
+        mySelfAdapter = new SetListStringAdapter();
+        mySelfAdapter.addItem( "周俊婷","这是一个成熟的女神~",v->startActivity(new Intent(MainActivity.activity,ChoseVoicePeople.class)));
+        mySelfAdapter.addItem("俞章政","国家级声音来源！",v->startActivity(new Intent(MainActivity.activity,ChoseVoicePeople.class)));
+        mySelfAdapter.addItem("杨博伦","不是女生，胜似女生~~~~",v->startActivity(new Intent(MainActivity.activity,ChoseVoicePeople.class)));
         SettingList.setLayoutManager(new LinearLayoutManager(MainActivity.activity,LinearLayoutManager.VERTICAL,true));
         SettingList.setAdapter(mySelfAdapter);
 
     }
 
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        finish();
+
+        return  true;
+    }
 }

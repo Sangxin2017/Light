@@ -9,14 +9,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.jxaummd.light.MainActivity;
 import com.jxaummd.light.R;
 import com.jxaummd.light.base.adapter.MySelfAdapter;
+import com.jxaummd.light.base.adapter.SetListStringAdapter;
 
 public class ChoseWarkUpWord extends AppCompatActivity {
     private RecyclerView SettingList;
-    private MySelfAdapter mySelfAdapter;
+    private SetListStringAdapter mySelfAdapter;
     private Toolbar  toolbar ;
 
 
@@ -38,14 +40,22 @@ public class ChoseWarkUpWord extends AppCompatActivity {
 
 
         SettingList=findViewById(R.id.myself_myselflist);
-        mySelfAdapter = new MySelfAdapter();
-        mySelfAdapter.addItem(0, "小娜同学",v->startActivity(new Intent(MainActivity.activity,ChoseWarkUpWord.class)),false);
-        mySelfAdapter.addItem(0,"智能台灯",null,false);
-        mySelfAdapter.addItem(0,"桑欣同学",null,false);
+        mySelfAdapter = new SetListStringAdapter();
+        mySelfAdapter.addItem( "小娜同学","一个可爱的称呼",v->startActivity(new Intent(MainActivity.activity,ChoseVoicePeople.class)));
+        mySelfAdapter.addItem("智能台灯","我的大名",v->startActivity(new Intent(MainActivity.activity,ChoseVoicePeople.class)));
+        mySelfAdapter.addItem("小光同学","是不是想到了什么呢？",v->startActivity(new Intent(MainActivity.activity,ChoseVoicePeople.class)));
         SettingList.setLayoutManager(new LinearLayoutManager(MainActivity.activity,LinearLayoutManager.VERTICAL,true));
         SettingList.setAdapter(mySelfAdapter);
 
     }
 
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        finish();
+
+        return  true;
+    }
 
 }

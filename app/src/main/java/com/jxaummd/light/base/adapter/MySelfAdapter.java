@@ -59,7 +59,7 @@ public class MySelfAdapter extends RecyclerView.Adapter<MySelfAdapter.MyViewHold
                     holder.image.setImageResource(list.get(position).getImage_id());
                 }
                 holder.title.setText(list.get(position).getTitle());
-              //  holder.fuzhuline.setBackgroundColor(Color.RED);
+
                 //设置单击事件
                 if(list.get(position).getiOnclickListener()!=null){
                     holder.view.setOnClickListener(list.get(position).getiOnclickListener());
