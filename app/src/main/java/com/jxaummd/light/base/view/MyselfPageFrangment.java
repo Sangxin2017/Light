@@ -16,6 +16,7 @@ import com.jxaummd.light.R;
 import com.jxaummd.light.base.adapter.MySelfAdapter;
 import com.jxaummd.light.base.iface.IOnclickListener;
 import com.jxaummd.light.base.myselfset.ChoseVoicePeople;
+import com.jxaummd.light.base.myselfset.ChoseWarkUpWord;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,14 +37,9 @@ public class MyselfPageFrangment extends Fragment{
         View view = inflater.inflate(R.layout.myself_layout,container,false);
         SettingList=view.findViewById(R.id.myself_myselflist);
         mySelfAdapter = new MySelfAdapter();
-        mySelfAdapter.addItem(R.drawable.geren_shijian, "时间校准", new IOnclickListener() {
-            @Override
-            public void onClick(View v) {
-                MyApplication.MyToast("时间校准!");
-            }
-        });
+        mySelfAdapter.addItem(R.drawable.geren_shijian,"时间校准",v->startActivity(new Intent(MainActivity.activity,ChoseVoicePeople.class)));
         mySelfAdapter.addItem(R.drawable.geren_fayinren,"发音人选择",v->startActivity(new Intent(MainActivity.activity,ChoseVoicePeople.class)));
-        mySelfAdapter.addItem(R.drawable.geren_guanjianci,"唤醒词选择");
+        mySelfAdapter.addItem(R.drawable.geren_guanjianci,"唤醒词选择",v->startActivity(new Intent(MainActivity.activity,ChoseWarkUpWord.class)));
         mySelfAdapter.addItem(R.drawable.geren_tianqi,"天气同步");
         mySelfAdapter.addItem(R.drawable.geren_naozhong,"闹铃选择");
         SettingList.setLayoutManager(new LinearLayoutManager(MainActivity.activity,LinearLayoutManager.VERTICAL,true));

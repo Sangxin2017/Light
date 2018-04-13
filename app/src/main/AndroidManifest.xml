@@ -66,6 +66,8 @@
             />
         <activity android:name=".base.myselfset.ChoseVoicePeople"
             />
+
+        <activity android:name=".base.myselfset.ChoseWarkUpWord"/>
     </application>
 
 </manifest>
