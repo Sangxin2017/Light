@@ -42,10 +42,11 @@ public class ChoseVoicePeople extends AppCompatActivity {
 
         SettingList=findViewById(R.id.myself_myselflist);
         mySelfAdapter = new SetListStringAdapter();
-        mySelfAdapter.addItem("俞章政(男)","国家级声音来源！",v->startActivity(new Intent(MainActivity.activity,ChoseVoicePeople.class)));
-        mySelfAdapter.addItem("杨博伦(男)","不是女生，胜似女生~~~~",v->startActivity(new Intent(MainActivity.activity,ChoseVoicePeople.class)));
-        mySelfAdapter.addItem( "周俊婷(女)","这是一个成熟的女神~",v->startActivity(new Intent(MainActivity.activity,ChoseVoicePeople.class)));
-        mySelfAdapter.addItem( "周俊婷(女)","这是一个成熟的女神~",v->startActivity(new Intent(MainActivity.activity,ChoseVoicePeople.class)));
+        mySelfAdapter.addItem("箜篌(男)","吴丝蜀桐张高秋，空山凝云颓不流。",v->startActivity(new Intent(MainActivity.activity,ChoseVoicePeople.class)));
+        mySelfAdapter.addItem("霓裳羽衣曲(女)","骊宫高处入青云，仙乐风飘处处闻。",v->startActivity(new Intent(MainActivity.activity,ChoseVoicePeople.class)));
+        mySelfAdapter.addItem( "古琴(女)","泠泠七弦遍，万木澄幽阴。",v->startActivity(new Intent(MainActivity.activity,ChoseVoicePeople.class)));
+        mySelfAdapter.addItem( "笛(男)","此夜曲中闻折柳，何人不起故园情",v->startActivity(new Intent(MainActivity.activity,ChoseVoicePeople.class)));
+        mySelfAdapter.addItem( "瑟(女)","千里潇湘挼蓝浦，兰桡昔日曾经。",v->startActivity(new Intent(MainActivity.activity,ChoseVoicePeople.class)));
         SettingList.setLayoutManager(new LinearLayoutManager(MainActivity.activity,LinearLayoutManager.VERTICAL,true));
         SettingList.setAdapter(mySelfAdapter);
 

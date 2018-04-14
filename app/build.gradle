@@ -36,4 +36,5 @@ dependencies {
     //动态权限请求
     compile 'com.github.jokermonn:permissions4m:2.0.0-lib'
     annotationProcessor 'com.github.jokermonn:permissions4m:2.0.0-processor'
+    compile 'com.timmy.tdialog:tdialog:1.3.1'
 }

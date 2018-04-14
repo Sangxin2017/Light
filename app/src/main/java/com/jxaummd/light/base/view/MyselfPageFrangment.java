@@ -20,6 +20,7 @@ import com.jxaummd.light.R;
 import com.jxaummd.light.base.adapter.MySelfAdapter;
 import com.jxaummd.light.base.iface.IOnclickListener;
 import com.jxaummd.light.base.myselfset.AboutSoftWare;
+import com.jxaummd.light.base.myselfset.BellChoseList;
 import com.jxaummd.light.base.myselfset.ChoseVoicePeople;
 import com.jxaummd.light.base.myselfset.ChoseWarkUpWord;
 
@@ -45,8 +46,8 @@ public class MyselfPageFrangment extends Fragment{
         mySelfAdapter.addItem(R.drawable.geren_guangyuwomen,"关于软件",v ->startActivity(new Intent(MainActivity.activity,AboutSoftWare.class)));
         mySelfAdapter.addItem(R.drawable.geren_fayinren,"发音人选择",v->startActivity(new Intent(MainActivity.activity,ChoseVoicePeople.class)));
         mySelfAdapter.addItem(R.drawable.geren_guanjianci,"唤醒词选择",v->startActivity(new Intent(MainActivity.activity,ChoseWarkUpWord.class)));
-        mySelfAdapter.addItem(R.drawable.geren_tianqi,"设备管理");
-        mySelfAdapter.addItem(R.drawable.geren_naozhong,"闹铃选择");
+        mySelfAdapter.addItem(R.drawable.geren_shebeiguanli,"设备管理");
+        mySelfAdapter.addItem(R.drawable.geren_naozhong,"闹铃选择",v->startActivity(new Intent(MainActivity.activity,BellChoseList.class)));
         mySelfAdapter.addItem(R.drawable.geren_gexinghua,"个性定制");
         SettingList.setLayoutManager(new LinearLayoutManager(MainActivity.activity,LinearLayoutManager.VERTICAL,true));
         SettingList.setAdapter(mySelfAdapter);
