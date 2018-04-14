@@ -4,10 +4,14 @@ import android.Manifest;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -37,29 +41,45 @@ public class MainActivity extends FragmentActivity {
     private LayoutInflater mInflater;
     private List<FragmentTab> fragmentTbaList ;
     public static  Activity activity;
-
+    Window window;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initView();         //初始化界面
         initpermission();   //初始化权限
         activity=this;
+        initStatuBar();
     }
+
+    private void setStatusColor(int red) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.setStatusBarColor(red);
+        }
+    }
+
+    private void initStatuBar() {
+        window = MainActivity.activity.getWindow();
+        //取消设置透明状态栏,使 ContentView 内容不再覆盖状态栏
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        //需要设置这个 flag 才能调用 setStatusBarColor 来设置状态栏颜色
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        //设置状态栏颜色
+
+    }
+
+
+
+
+
 
     private void initpermission() {
         Permissions4M.get(MainActivity.this).requestForce(true)
                 .requestPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
                 .requestCode(0) .request();
-
         if ( ! BluetoothAdapter.getDefaultAdapter().isEnabled()) {//蓝牙未开启
-           // Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-           //startActivityForResult(intent,BluetoothAdapter.REQUEST_BLUETOOTH_OPEN);
             BluetoothAdapter.getDefaultAdapter().enable();
 
         }
-    //    Permissions4M.get(MainActivity.this).requestForce(true) .requestPermission(Manifest.permission.RECORD_AUDIO).requestCode(1) .request();
-      //  Permissions4M.get(MainActivity.this).requestForce(true) .requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE).requestCode(2) .request();
-
 
     }
 
@@ -79,14 +99,12 @@ public class MainActivity extends FragmentActivity {
 
         //三个界面，三个Fragment
         fragmentTbaList= new ArrayList<>();
-        FragmentTab tab = new FragmentTab(R.drawable.main_bottom_home_selector,"home", HomePageFragment.class);
-        FragmentTab music = new FragmentTab(R.drawable.main_bottom_music_selector,"music", MusicPageFragment.class);
-    //    FragmentTab tab1 = new FragmentTab(R.drawable.main_bottom_store_selector,"store", StorePageFragment.class);
-        FragmentTab tab2 = new FragmentTab(R.drawable.main_bottom_myself_selector,"myself", MyselfPageFrangment.class);
+        FragmentTab tab = new FragmentTab(R.drawable.main_bottom_home_selector,"home", HomePageFragment.class,v -> {setStatusColor(getResources().getColor(R.color.colorPrimaryDark));});
+        FragmentTab music = new FragmentTab(R.drawable.main_bottom_music_selector,"music", MusicPageFragment.class,v -> {setStatusColor(getResources().getColor(R.color.white));});
+        FragmentTab tab2 = new FragmentTab(R.drawable.main_bottom_myself_selector,"myself", MyselfPageFrangment.class,v -> {setStatusColor(getResources().getColor(R.color.colorPrimaryDark));MyApplication.MyToast("  color");});
 
         fragmentTbaList.add(tab);
         fragmentTbaList.add(music);
-     //   fragmentTbaList.add(tab1);
         fragmentTbaList.add(tab2);
 
         //添加到FragmentTabHost中
@@ -98,6 +116,24 @@ public class MainActivity extends FragmentActivity {
         //设置启动的fragment
         mTabHost.setCurrentTab(0);
 
+
+        mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                switch (tabId){
+                    case "home":
+                        setStatusColor(getResources().getColor(R.color.colorPrimaryDark));
+                        break;
+                     case "music":
+                         setStatusColor(getResources().getColor(R.color.blue));
+                         break;
+                    case  "myself":
+                        setStatusColor(getResources().getColor(R.color.colorPrimaryDark));
+                        break;
+                }
+            }
+        });
+
     }
 
     //构建Indicator
@@ -105,6 +141,7 @@ public class MainActivity extends FragmentActivity {
         View view =mInflater.inflate(R.layout.tab_indicator,null);
         ImageView img = (ImageView) view.findViewById(R.id.icon_tab);
         img.setImageResource(tab.getIcon());
+     //   img.setOnClickListener(tab.getiOnclickListener());
         return  view;
     }
 
@@ -118,17 +155,12 @@ public class MainActivity extends FragmentActivity {
     //初始化线程
     private void initService() {
 
-
         Intent intent = new Intent(this, SpeechRecWakService.class);
         startService(intent);
         intent = new Intent(this, MediaPlayService.class);
         startService(intent);
         intent = new Intent(this, BluetoothLeService.class);
         startService(intent);
-
-
-
-
 
     }
 

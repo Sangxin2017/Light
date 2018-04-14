@@ -68,6 +68,8 @@
             />
 
         <activity android:name=".base.myselfset.ChoseWarkUpWord"/>
+
+        <activity android:name=".base.myselfset.AboutSoftWare"/>
     </application>
 
 </manifest>
